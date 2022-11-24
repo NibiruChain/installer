@@ -16,7 +16,7 @@ function fail {
 function install {
 	#settings
 	USER="{{ .User }}"
-	PROG="{{ .Program }}"
+	PROG='{{ if eq .Program "nibiru" }}nibid{{ else }}{{ .Program }}{{ end }}'
 	ASPROG="{{ .AsProgram }}"
 	MOVE="{{ .MoveToPath }}"
 	RELEASE="{{ .Release }}"

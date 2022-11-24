@@ -1,8 +1,9 @@
-module github.com/jpillora/installer
+module github.com/nibiruchain/installer
 
 go 1.18
 
 require (
+	github.com/jpillora/installer v0.3.3
 	github.com/jpillora/opts v1.1.2
 	github.com/jpillora/requestlog v1.0.0
 )

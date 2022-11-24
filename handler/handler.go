@@ -16,7 +16,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/jpillora/installer/scripts"
+	"github.com/nibiruchain/installer/scripts"
 )
 
 const (
@@ -69,10 +69,6 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("OK"))
 		return
 	}
-	if r.URL.Path == "/" {
-		http.Redirect(w, r, "https://github.com/jpillora/installer", http.StatusMovedPermanently)
-		return
-	}
 	// calculate response type
 	ext := ""
 	script := ""
@@ -117,8 +113,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// "route"
 	m := pathRe.FindStringSubmatch(r.URL.Path)
 	if len(m) == 0 {
-		showError("Invalid path", http.StatusBadRequest)
-		return
+		m = pathRe.FindStringSubmatch("/NibiruChain/nibid" + strings.TrimPrefix(r.URL.Path, "/"))
 	}
 	q := Query{
 		User:       m[2],
@@ -132,14 +127,10 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	// pick a user
 	if q.User == "" {
-		if q.Program == "micro" {
-			// micro > nano!
-			q.User = "zyedidia"
-		} else {
-			// use default user, but fallback to google
-			q.User = h.Config.User
-			q.Google = true
-		}
+		q.User = h.Config.User
+	}
+	if q.Program == "" || q.Program == "nibid" {
+		q.Program = "nibiru"
 	}
 	// fetch assets
 	result, err := h.execute(q)
