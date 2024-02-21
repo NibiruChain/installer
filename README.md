@@ -49,6 +49,7 @@ curl https://i.jpillora.com/<query>! | bash
 * https://i.jpillora.com/mholt/caddy
 * https://i.jpillora.com/caddy
 * https://i.jpillora.com/rclone
+* https://i.jpillora.com/ripgrep?as=rg
 
     ```sh
     $ curl -s i.jpillora.com/mholt/caddy! | bash
@@ -79,13 +80,13 @@ See https://github.com/jpillora/installer/issues/31 for how this could improved
     go get github.com/jpillora/installer
     ```
 
-* Install on Heroku
+* Install on [Fly.io](https://fly.io)
 
-    Click this button to deploy for free on [Heroku](https://heroku.com)
-
-	[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-    *You can optionally add your own domain as a app custom domain.*
+    * Clone this repo
+    * Setup the `fly` CLI tool
+    * Create a new app
+    * Replace `app = "installer"` in `fly.toml` with your app name
+    * Run `fly deploy`
 
 ## Force a particular `user/repo`
 
@@ -97,7 +98,7 @@ export FORCE_REPO=micro
 ./installer
 ```
 
-Then calls to `curl 'localhost:3000` will return the install script for `zyedidia/micro`
+Then calls to `curl localhost:3000` will return the install script for `zyedidia/micro`
 
 ### Homebrew
 

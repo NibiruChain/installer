@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"testing"
 
-	"github.com/jpillora/installer/handler"
+	"github.com/nibiruchain/installer/handler"
 )
 
 func TestJPilloraServe(t *testing.T) {
