@@ -8,16 +8,16 @@ import (
 	"os"
 	"time"
 
-	"github.com/jpillora/installer/handler"
 	"github.com/jpillora/opts"
 	"github.com/jpillora/requestlog"
+	"github.com/nibiruchain/installer/handler"
 )
 
 var version = "0.0.0-src"
 
 func main() {
 	c := handler.DefaultConfig
-	opts.New(&c).Repo("github.com/jpillora/installer").Version(version).Parse()
+	opts.New(&c).Repo("github.com/NibiruChain/installer").Version(version).Parse()
 	log.Printf("default user is '%s'", c.User)
 	if c.Token == "" && os.Getenv("GH_TOKEN") != "" {
 		c.Token = os.Getenv("GH_TOKEN") // GH_TOKEN was renamed

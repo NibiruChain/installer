@@ -16,7 +16,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/jpillora/installer/scripts"
+	"github.com/nibiruchain/installer/scripts"
 )
 
 const (
@@ -132,9 +132,14 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if q.Release == "" {
 		q.Release = "latest"
 	}
-	// micro > nano!
-	if q.User == "" && q.Program == "micro" {
-		q.User = "zyedidia"
+	if q.User == "" {
+		q.User = "NibiruChain"
+	}
+	if q.Program == "" {
+		q.Program = "nibiru"
+	}
+	if q.Program == "nibiru" {
+		q.AsProgram = "nibid"
 	}
 	// force user/repo
 	if h.Config.ForceUser != "" {
@@ -146,7 +151,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// validate query
 	valid := q.Program != ""
 	if !valid && path == "" {
-		http.Redirect(w, r, "https://github.com/jpillora/installer", http.StatusMovedPermanently)
+		http.Redirect(w, r, "https://github.com/NibiruChain/installer", http.StatusMovedPermanently)
 		return
 	}
 	if !valid {
