@@ -122,10 +122,14 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	var rest string
 	q.User, rest = splitHalf(path, "/")
+	if rest == "" {
+		rest = q.User
+		q.User = h.Config.User
+	}
 	q.Program, q.Release = splitHalf(rest, "@")
 	// no program? treat first part as program, use default user
 	if q.Program == "" {
-		q.Program = q.User
+		q.Program = "nibiru"
 		q.User = h.Config.User
 		q.Search = true
 	}
