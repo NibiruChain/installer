@@ -73,7 +73,7 @@ func (h *Handler) getAssetsNoCache(q Query) (string, Assets, error) {
 	release := q.Release
 	//not cached - ask github
 	log.Printf("fetching asset info for %s/%s@%s", user, repo, release)
-	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/releases", user, repo)
+	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/releases?per_page=1000", user, repo)
 	ghas := ghAssets{}
 	if release == "" || release == "latest" {
 		url += "/latest"
